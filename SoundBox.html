@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>H1Z1 soundbox</title>
+  <link rel="stylesheet" href="SoundBox.css">
+</head>
+<body>
+
+<h1>it works</h1>
+  <div class="keys">
+    <div data-key="81" class="key">
+      <kbd>Q</kbd>
+      <span class="sound">AK-47</span>
+    </div>
+    <div data-key="90" class="key">
+      <kbd>Z</kbd>
+      <span class="sound">AR-15</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">Shotgun</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">Body</span>
+    </div>
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">Helmet</span>
+    </div>
+    <div data-key="69" class="key">
+      <kbd>E</kbd>
+      <span class="sound">Head</span>
+    </div>
+    <!-- <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">Armor</span>
+    </div>
+    <div data-key="67" class="key">
+      <kbd>C</kbd>
+      <span class="sound">Makeshift</span>
+    </div>
+    <div data-key="82" class="key">
+      <kbd>R</kbd>
+      <span class="sound">Car</span>
+    </div> -->
+  </div>
+
+  <audio data-key="81" src="sounds/AK-47.mp3"></audio>
+  <audio data-key="90" src="sounds/AR-15.mp3"></audio>
+  <audio data-key="68" src="sounds/Shotgun.mp3"></audio>
+  <audio data-key="83" src="sounds/body.mp3"></audio>
+  <audio data-key="65" src="sounds/helmet.mp3"></audio>
+  <audio data-key="69" src="sounds/headshot.mp3"></audio>
+  <!-- <audio data-key="70" src="sounds/snare.wav"></audio>
+  <audio data-key="67" src="sounds/tom.wav"></audio>
+  <audio data-key="82" src="sounds/tink.wav"></audio> -->
+
+<script>
+  window.addEventListener("keydown", playSound);
+  function playSound(e) {
+      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+      const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+      if (!audio) return;
+      audio.currentTime = 0;
+      audio.play();
+      key.classList.add("playing")
+    }
+  function removeTransition(e) {
+    e.currentTarget.classList.remove("playing");
+  };
+
+  const keys = document.querySelectorAll(".key");
+  keys.forEach((key) => key.addEventListener("transitionend", removeTransition));
+</script>
+
+
+</body>
+</html>
